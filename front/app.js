@@ -1,11 +1,28 @@
-var flapperNews = angular.module('flapperNews', []);
+var flapperNews = angular.module('flapperNews', ['ui.router']);
+
+
+flapperNews.config([
+'$stateProvider',
+'$urlRouterProvider',
+function($stateProvider, $urlRouterProvider) {
+
+  $stateProvider
+    .state('home', {
+      url: '/home',
+      templateUrl: '/home.html',
+      controller: 'MainCtrl'
+    });
+
+  $urlRouterProvider.otherwise('home');
+}]);
+
 
 flapperNews.factory('posts', [function(){
   var o = {
     posts: []
   };
   return o;
-}])
+}]);
 
 
 flapperNews.controller('MainCtrl', [
