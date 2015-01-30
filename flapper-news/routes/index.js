@@ -21,8 +21,14 @@ router.get('/posts', function(req, res, next) {
   });
 });
 
-router.get('/posts/:post', function(req, res) {
-  res.json(req.post);
+// router.get('/posts/:post', function(req, res) {
+//   res.json(req.post);
+// });
+
+router.get('/posts/:post', function(req, res, next) {
+  req.post.populate('comments', function(err, post) {
+    res.json(post);
+  });
 });
 
 /* POST post */
@@ -61,6 +67,7 @@ router.post('/posts/:post/comments', function(req, res, next) {
     });
   });
 });
+
 
 
 /* PARAM post */
